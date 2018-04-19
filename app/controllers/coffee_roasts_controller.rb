@@ -28,6 +28,8 @@ class CoffeeRoastsController < ApplicationController
 
     respond_to do |format|
       if @coffee_roast.save
+        message = "Hey,'#{@coffee_roast.roast_name}' ."
+        TwilioTextMessenger.new(message).call
         format.html { redirect_to @coffee_roast, notice: 'Coffee roast was successfully created.' }
         format.json { render :show, status: :created, location: @coffee_roast }
       else
